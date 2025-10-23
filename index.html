@@ -6,72 +6,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {margin: 0; background: #181818; font-family: 'Montserrat', Arial, sans-serif; color: #eae8e6; min-height: 100vh; overflow-x: hidden;}
-    #bg-video {position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -2; filter: brightness(0.5) saturate(1.1) blur(0.7px); animation: panbg 60s linear infinite alternate;}
-    @keyframes panbg {0%{transform:scale(1) translateX(0);}100%{transform:scale(1.06) translateX(-4vw);}}
-    .overlay {position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(117deg, #161717bf 35%, #2c2a2f55 130%); opacity: 0.62; z-index: -1; pointer-events: none;}
-    header {text-align: center; margin: 0 auto; padding: 2rem 0 0.8rem 0;}
-    .logo-album {width: 92px; height: auto; margin-bottom: 1.1rem; filter: drop-shadow(0 0 14px #d9be89aa);}
-    h1 {font-family:'Orbitron'; font-size:2.8rem; color:#fffbe9; letter-spacing:2px;margin:0 0 0.3rem 0; font-weight:700; text-shadow:0 0 24px #e9c46833;filter:drop-shadow(0 0 9px #e9c46866);opacity:0.98;}
-    .subtitle{font-size:1.22rem;color:#dcc793;margin-bottom:2rem;font-weight:400;font-style:italic;letter-spacing:1.1px;opacity:0.82;margin-top:0.8rem;}
-    nav{margin:1.2rem auto 0.6rem auto;text-align:center;}
-    nav a{display:inline-block;background:rgba(56,53,41,0.32);color:#e9c468;font-family:'Orbitron';padding:0.45rem 1.4rem;margin:0 0.4rem;border-radius:8px;text-decoration:none;border:1.5px solid #e9c46822;font-size:0.97rem;font-weight:500;letter-spacing:1px;transition:background 0.18s, color 0.18s, border 0.16s;}
+    body { margin:0; background:#181818; font-family:'Montserrat',Arial,sans-serif; color:#eae8e6; min-height:100vh; overflow-x:hidden;}
+    #bg-video { position:fixed; top:0; left:0; width:100vw; height:100vh; object-fit:cover; z-index:-2; filter:brightness(0.5) saturate(1.1) blur(0.7px); animation:panbg 60s linear infinite alternate;}
+    @keyframes panbg { 0%{transform:scale(1) translateX(0);} 100%{transform:scale(1.06) translateX(-4vw);}}
+    .overlay { position:fixed; top:0; left:0; width:100vw; height:100vh; background:linear-gradient(117deg,#161717bf 35%,#2c2a2f55 130%); opacity:0.62; z-index:-1; pointer-events:none;}
+    header { text-align:center; margin:0 auto; padding:2rem 0 0.8rem 0;}
+    .logo-album { width:92px; height:auto; margin-bottom:1.1rem; filter:drop-shadow(0 0 14px #d9be89aa);}
+    h1 { font-family:'Orbitron'; font-size:2.8rem; color:#fffbe9; letter-spacing:2px;margin:0 0 0.3rem 0; font-weight:700; text-shadow:0 0 24px #e9c46833;filter:drop-shadow(0 0 9px #e9c46866);opacity:0.98;}
+    .subtitle {font-size:1.22rem;color:#dcc793;margin-bottom:2rem;font-weight:400;font-style:italic;letter-spacing:1.1px;opacity:0.82;margin-top:0.8rem;}
+    nav {margin:1.2rem auto 0.6rem auto;text-align:center;}
+    nav a {display:inline-block;background:rgba(56,53,41,0.32);color:#e9c468;font-family:'Orbitron';padding:0.45rem 1.4rem;margin:0 0.4rem;border-radius:8px;text-decoration:none;border:1.5px solid #e9c46822;font-size:0.97rem;font-weight:500;letter-spacing:1px;transition:background 0.18s, color 0.18s, border 0.16s;}
     nav a:hover{background:#c4a353;color:#222;border:1.5px solid #e9c46899;}
-    .main-glass {max-width: 570px;margin: 4vh auto 0 auto;padding: 2.7rem 2rem 2.2rem 2rem;background:rgba(31,23,15,0.91);border-radius:34px;backdrop-filter:blur(20px);box-shadow:0 10px 54px #ad8b3615, 0 1px 18px #dcc7930f;display:flex;flex-direction:column;align-items:center;position:relative;animation:fadeInGlass 1.4s;}
+    .main-glass { max-width: 570px; margin: 4vh auto 0 auto; padding: 2.7rem 2rem 2.2rem 2rem; background:rgba(31,23,15,0.91); border-radius:34px; backdrop-filter:blur(20px); box-shadow:0 10px 54px #ad8b3615,0 1px 18px #dcc7930f; display:flex;flex-direction:column;align-items:center;position:relative;animation:fadeInGlass 1.4s;}
     @keyframes fadeInGlass{from{opacity:0;transform:translateY(12px);}to{opacity:1;}}
     .daftpunk-head{display:flex;flex-direction:column;align-items:center;margin-bottom:2rem;margin-top:-4.2rem;z-index:2;position:relative;}
     .avatar-img{width:155px;height:155px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 0 46px #f8e0b9cc) drop-shadow(0 0 12px #ffeec066);box-shadow:0 8px 38px #ffeec0cc,0 1px 15px #ffd18165;border:4px solid #e9c46869;background:rgba(40,27,16,0.33);animation:glowram 2.5s infinite alternate;transition:box-shadow 0.2s, border-color 0.2s;}
     @keyframes glowram{0%{box-shadow:0 8px 34px #ffeec0bb;}100%{box-shadow:0 14px 56px #e9c468ba;}}
     .avatar-img:hover{filter:brightness(1.08) drop-shadow(0 0 59px #e9c468cc) drop-shadow(0 0 20px #fff);border-color:#fffbe9;}
     .avatar-label{color:#e9c468;font-family:'Orbitron';font-size:1.09rem;margin-top:0.6rem;margin-bottom:0.5rem;letter-spacing:1px;font-weight:700;text-shadow:0 0 9px #ffd88136;opacity:0.93;}
-    /* --- REPRODUCTOR --- */
+    /* REPRODUCTOR CUSTOM */
     .player-box {
-      background: rgba(40,30,12,0.91);
-      padding: 1.2rem 1rem;
-      margin-bottom: 1.2rem;
-      border-radius: 16px;
-      box-shadow: 0 2px 20px #e9c46825;
-      width: 100%;
+      background: linear-gradient(120deg,rgba(38,29,9,0.96) 70%, #e9c46822 120%);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      margin-bottom:1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 28px #e9c4681c, 0 2px 12px #ffd18111;
+      width:100%;
+      text-align: center;
+      border: 2px solid #e9c46844;
+      position: relative;
+      overflow: visible;
     }
     .player-title {
       font-family: 'Orbitron';
-      color: #e9c468;
+      color: #efc553;
       font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 0.7rem;
-      text-shadow: 0 0 9px #e9c46844;
+      font-size: 1.15rem;
+      margin-bottom:1rem;
+      letter-spacing: 0.8px;
+      text-align: center;
+      text-shadow: 0 0 14px #e9c46877, 0 0 12px #fff6;
+      display: flex;
+      align-items: center;
+      gap:7px;
+      justify-content:center;
+    }
+    .player-title:before {
+      content:'🎵';
+      font-size:1.28rem;
+      margin-right:7px;
+      filter: drop-shadow(0 0 3px #e9c46888);
+    }
+    .player-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width:100%;
+      margin-bottom: 1em;
     }
     .player-select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 0.7rem;
-      border-radius: 11px;
-      background: #23211b;
+      flex:1;
+      padding: 0.57rem 0.6rem;
+      border-radius: 14px;
+      background: #171613;
       color: #e9c468;
-      font-family: 'Montserrat';
-      border: 1.2px solid #e9c46844;
+      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+      border: 1.5px solid #e9c46866;
+      font-size: 1rem;
+      transition: border 0.2s;
+      margin: 0 0.35em;
+      box-shadow: 0 1px 6px #e9c46822;
+      letter-spacing:1px;
     }
-    .player-select:focus {outline: none;border: 2px solid #e9c468;}
-    audio {background: #23211b;border-radius: 9px;box-shadow: 0 1px 8px #e9c46822;}
-    /* --- IFRAME BOT --- */
-    .chatbot-area {
-      background: rgba(31,23,15,0.97);
-      border-radius: 22px;
-      box-shadow: 0 1px 19px #e9c46813, 0 0 39px #e9c46833;
-      padding: 1.2rem 1rem 0.8rem 1rem;
-      width: 100%;
-      margin-bottom: 1.1rem;
+    .player-select:focus {outline: none; border: 2px solid #fff59d;}
+    .player-controls {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin: 1.1em 0 0.2em 0;
+      width:100%;
     }
-    .chatbot-area iframe {
-      min-width: 340px; width: 100%; min-height: 430px; border: none;
-      border-radius: 16px; 
-      background: transparent;
-      box-shadow: 0 0 26px #e9c46840;
-      margin-bottom: 0;
+    .player-btn {
+      background: linear-gradient(90deg,#fffde9 60%,#e9c468 100%);
+      color: #232323;
+      border: none;
+      border-radius: 50%;
+      width: 41px; height: 41px;
+      font-size: 1.3rem;
+      font-family: 'Orbitron';
+      box-shadow: 0 2px 8px #e9c46844, 0 0.5px 2px #fff8;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, transform 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content:center;
     }
+    .player-btn:active {transform:scale(0.89);}
+    .player-btn[disabled] {opacity:0.4;}
+    .player-slider {
+      flex:1;
+      margin:0 0.8em;
+      accent-color: #e9c468;
+      height: 3.5px;
+      border-radius: 6px;
+      background: linear-gradient(90deg,#efd99e 60%,#e9c468 100%);
+    }
+    .player-time {
+      color: #efe2b5;
+      font-family: 'Orbitron';
+      font-size: 1rem;
+      letter-spacing: 1.2px;
+      margin: 0 0.4em;
+    }
+    /* IFRAME BOT */
+    .chatbot-area {background:rgba(31,23,15,0.97);border-radius:22px;box-shadow:0 1px 19px #e9c46813,0 0 39px #e9c46833;padding:1.2rem 1rem 0.8rem 1rem;width:100%;margin-bottom:1.1rem;display:flex;flex-direction:column;align-items:center;}
+    .chatbot-area iframe {min-width:340px;width:100%;min-height:430px;border:none;border-radius:16px;background:transparent;box-shadow:0 0 26px #e9c46840;margin-bottom:0;}
     .curiosidades {background:rgba(64,54,30,0.43);border-radius:14px;padding:1.1rem 1.4rem 1rem 1.4rem;color:#e6dec7;box-shadow:0 2px 16px #ecc96e13;font-size:1.02rem;margin-bottom:2.1rem;width:100%;opacity:0.94;}
     .curiosidades ul {margin:0; padding-left:1rem; list-style: disc;}
     .curiosidades li {margin-bottom:0.45rem; transition: color 0.22s;}
@@ -89,6 +139,8 @@
       .avatar-img{width:90px;height:90px;}
       .curiosidades,.contact-box,.player-box{padding:1rem;}
       .chatbot-area iframe{min-width:220px;min-height:220px;}
+      .player-row{flex-direction:column;}
+      .player-controls{flex-direction:column;}
     }
   </style>
 </head>
@@ -114,28 +166,39 @@
         <img src="cabeza.jpg" alt="Avatar Daft Punk RAM" class="avatar-img">
         <div class="avatar-label">RAM Bot</div>
       </div>
-      <!-- REPRODUCTOR MUSICAL -->
+      <!-- REPRODUCTOR CUSTOM RAM -->
       <div class="player-box" id="player-box">
-        <div class="player-title">🎵 Reproductor Random Access Memories</div>
-        <select id="songSelector" class="player-select">
-          <option value="">Selecciona una canción...</option>
-          <option value="Give Life Back to Music.mp3">Give Life Back to Music</option>
-          <option value="The Game of Love.mp3">The Game of Love</option>
-          <option value="Giorgio by Moroder.mp3">Giorgio by Moroder</option>
-          <option value="Within.mp3">Within</option>
-          <option value="Instant Crush (feat. Julian Casablancas).mp3">Instant Crush</option>
-          <option value="Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3">Lose Yourself to Dance</option>
-          <option value="Touch (feat. Paul Williams).mp3">Touch</option>
-          <option value="Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3">Get Lucky</option>
-          <option value="Beyond.mp3">Beyond</option>
-          <option value="Motherboard.mp3">Motherboard</option>
-          <option value="Fragments of Time (feat. Todd Edwards).mp3">Fragments of Time</option>
-          <option value="Doin' it Right (feat. Panda Bear).mp3">Doin' it Right</option>
-          <option value="Contact.mp3">Contact</option>
-        </select>
-        <audio id="audioPlayer" controls style="width:100%;margin-top:1rem;">
+        <div class="player-title">Reproductor Random Access Memories</div>
+        <div class="player-row">
+          <select id="songSelector" class="player-select">
+            <option value="">Selecciona una canción...</option>
+            <option value="Give Life Back to Music.mp3">Give Life Back to Music</option>
+            <option value="The Game of Love.mp3">The Game of Love</option>
+            <option value="Giorgio by Moroder.mp3">Giorgio by Moroder</option>
+            <option value="Within.mp3">Within</option>
+            <option value="Instant Crush (feat. Julian Casablancas).mp3">Instant Crush</option>
+            <option value="Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3">Lose Yourself to Dance</option>
+            <option value="Touch (feat. Paul Williams).mp3">Touch</option>
+            <option value="Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3">Get Lucky</option>
+            <option value="Beyond.mp3">Beyond</option>
+            <option value="Motherboard.mp3">Motherboard</option>
+            <option value="Fragments of Time (feat. Todd Edwards).mp3">Fragments of Time</option>
+            <option value="Doin' it Right (feat. Panda Bear).mp3">Doin' it Right</option>
+            <option value="Contact.mp3">Contact</option>
+          </select>
+        </div>
+        <div class="player-controls">
+          <button class="player-btn" id="prevBtn" title="Anterior">&#9198;</button>
+          <button class="player-btn" id="playPauseBtn" title="Play">&#9658;</button>
+          <button class="player-btn" id="nextBtn" title="Siguiente">&#9197;</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;width:100%;margin:1em 0;">
+          <span class="player-time" id="currentTime">0:00</span>
+          <input type="range" min="0" max="100" value="0" class="player-slider" id="seekBar">
+          <span class="player-time" id="duration">0:00</span>
+        </div>
+        <audio id="audioPlayer">
           <source id="audioSource" src="">
-          Tu navegador no soporta audio.
         </audio>
       </div>
       <!-- CHATBOT IFRAME RAM PERSONALIZADO -->
@@ -170,19 +233,107 @@
   </footer>
   <div class="modal" id="modal"><div class="modal-content" id="modal-content"></div></div>
   <script>
-    // Reproductor
+    // Reproductor personalizado RAM
     const songSelector = document.getElementById("songSelector");
     const audioPlayer = document.getElementById("audioPlayer");
     const audioSource = document.getElementById("audioSource");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const seekBar = document.getElementById("seekBar");
+    const currentTime = document.getElementById("currentTime");
+    const duration = document.getElementById("duration");
+
+    const songs = Array.from(songSelector.options).slice(1).map(opt => opt.value);
+
+    let currentSongIndex = 0;
+    let isPlaying = false;
+
+    function loadSong(idx){
+      const song = songs[idx];
+      songSelector.value = song;
+      audioSource.src = song;
+      audioPlayer.load();
+      isPlaying=false;
+      updatePlayPause();
+      setTimeout(()=>{
+        updateTimes();
+      },500);
+    }
+
     songSelector.addEventListener("change", function() {
-      const selectedSong = this.value;
-      if(selectedSong){
-        audioSource.src = selectedSong;
-        audioPlayer.load();
-        audioPlayer.play();
-      }
+      currentSongIndex = songs.indexOf(this.value);
+      loadSong(currentSongIndex);
+      playAudio();
     });
-    
+
+    playPauseBtn.addEventListener("click",function(){
+      if(isPlaying){audioPlayer.pause();}else{audioPlayer.play();}
+    });
+
+    nextBtn.addEventListener('click', function(){
+      currentSongIndex = (currentSongIndex+1)%songs.length;
+      loadSong(currentSongIndex);
+      playAudio();
+    });
+
+    prevBtn.addEventListener('click', function(){
+      currentSongIndex = (currentSongIndex-1+songs.length)%songs.length;
+      loadSong(currentSongIndex);
+      playAudio();
+    });
+
+    audioPlayer.addEventListener("play",()=>{
+      isPlaying=true;
+      updatePlayPause();
+    });
+    audioPlayer.addEventListener("pause",()=>{
+      isPlaying=false;
+      updatePlayPause();
+    });
+
+    audioPlayer.addEventListener("ended", function(){
+      nextBtn.click();
+    });
+
+    function updatePlayPause(){
+      playPauseBtn.innerHTML = isPlaying?'&#10073;&#10073;':'&#9658;';
+    }
+
+    function playAudio(){
+      audioPlayer.play();
+    }
+
+    // Barra de progreso y tiempo
+    audioPlayer.addEventListener("timeupdate", updateTimes);
+    seekBar.addEventListener("input", function() {
+      audioPlayer.currentTime = this.value * audioPlayer.duration / 100;
+    });
+
+    audioPlayer.addEventListener("loadedmetadata", updateTimes);
+
+    function updateTimes(){
+      if(audioPlayer.duration){
+        let cur = audioPlayer.currentTime;
+        let dur = audioPlayer.duration;
+        seekBar.value=Math.floor((cur/dur)*100)||0;
+        currentTime.textContent = formatTime(cur);
+        duration.textContent = formatTime(dur);
+      } else {
+        currentTime.textContent = "0:00";
+        duration.textContent = "0:00";
+        seekBar.value=0;
+      }
+    }
+    function formatTime(s){
+      s=Math.floor(s);
+      let min = Math.floor(s/60); let sec = s%60;
+      return `${min}:${sec<10 ? '0'+sec : sec}`;
+    }
+
+    // Cargar la primera canción por defecto
+    loadSong(currentSongIndex);
+
     // Modal contacto
     function showModal(tipo) {
       const modal = document.getElementById('modal');
