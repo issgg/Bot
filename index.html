@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Access Memories AI | Daft Punk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.5) saturate(1.1) blur(0.7px);
+      animation: panbg 60s linear infinite alternate;
+    }
+    @keyframes panbg {
+      0% {transform: scale(1) translateX(0);}
+      100% {transform: scale(1.06) translateX(-4vw);}
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: linear-gradient(117deg, #161717bf 35%, #2c2a2f55 130%);
+      opacity: 0.62;
+      z-index: -1;
+      pointer-events: none;
+    }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #eae8e6;
+      background: #181818;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      margin: 0 auto;
+      padding: 2rem 0 0.8rem 0;
+      background: none;
+      box-shadow: none;
+      position: relative;
+    }
+    .logo-album {
+      width: 92px;
+      height: auto;
+      margin-bottom: 1.1rem;
+      filter: drop-shadow(0 0 14px #d9be89aa);
+      display: block; margin-left: auto; margin-right: auto;
+    }
+    h1 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 2.8rem;
+      color: #fffbe9;
+      letter-spacing: 2px;
+      margin: 0 0 0.3rem 0;
+      font-weight: 700;
+      text-shadow: 0 0 24px #e9c46833;
+      filter: drop-shadow(0 0 9px #e9c46866);
+      opacity: 0.98;
+    }
+    .subtitle {
+      font-size: 1.22rem;
+      color: #dcc793;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 1.1px;
+      opacity: 0.82;
+      margin-top: 0.8rem;
+    }
+    nav {
+      margin: 1.2rem auto 0.6rem auto;
+      text-align: center;
+    }
+    nav a {
+      display: inline-block;
+      background: rgba(56,53,41,0.32);
+      color: #e9c468;
+      font-family: 'Orbitron';
+      padding: 0.45rem 1.4rem;
+      margin: 0 0.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1.5px solid #e9c46822;
+      font-size: 0.97rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: background 0.18s, color 0.18s, border 0.16s;
+    }
+    nav a:hover {
+      background: #c4a353;
+      color: #222;
+      border: 1.5px solid #e9c46899;
+    }
+    .main-glass {
+      max-width: 570px;
+      margin: 4vh auto 0 auto;
+      padding: 2.7rem 2rem 2.2rem 2rem;
+      background: rgba(31,23,15,0.66);
+      border-radius: 34px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 54px #ad8b3615, 0 1px 18px #dcc7930f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: fadeInGlass 1.4s;
+    }
+    @keyframes fadeInGlass {from {opacity:0; transform:translateY(12px);} to {opacity:1;}}
+    .daftpunk-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+      margin-top: -4.2rem;
+      z-index: 2;
+      position: relative;
+    }
+    .avatar-img {
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 46px #f8e0b9cc) drop-shadow(0 0 12px #ffeec066);
+      box-shadow: 0 8px 38px #ffeec0cc, 0 1px 15px #ffd18165;
+      border: 4px solid #e9c46869;
+      background: rgba(40,27,16,0.33);
+      animation: glowram 2.5s infinite alternate;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    @keyframes glowram {
+      0% {box-shadow: 0 8px 34px #ffeec0bb;}
+      100% {box-shadow: 0 14px 56px #e9c468ba;}
+    }
+    .avatar-img:hover {
+      filter: brightness(1.08) drop-shadow(0 0 59px #e9c468cc) drop-shadow(0 0 20px #fff);
+      border-color: #fffbe9;
+    }
+    .avatar-label {
+      color: #e9c468;
+      font-family: 'Orbitron';
+      font-size: 1.09rem;
+      margin-top: 0.6rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-shadow: 0 0 9px #ffd88136;
+      opacity: 0.93;
+    }
+    .chatbot-area {
+      background: rgba(31,23,15,0.74);
+      border-radius: 16px;
+      box-shadow: 0 1px 19px #e9c46813;
+      padding: 1.1rem 1.1rem 0.8rem 1.1rem;
+      font-size: 1.05rem;
+      color: #f7ecd4;
+      width: 100%;
+      margin-bottom: 1.1rem;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      min-height: 120px;
+      align-items: center;
+    }
+    .chat-history {
+      width: 100%;
+      background: transparent;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 0.7rem;
+      font-size: 1.02rem;
+      line-height: 1.4;
+      border-radius: 6px;
+      border: none;
+      color: #faeebd;
+    }
+    .chat-bubble.user {
+      background: #c4a353a1;
+      color: #212121;
+      border-radius: 13px 13px 13px 3px;
+      margin: 3px 0;
+      padding: 7px 11px;
+      text-align: left;
+      max-width: 95%;
+      align-self: flex-end;
+      font-family: 'Montserrat';
+    }
+    .chat-bubble.bot {
+      background: #22221cde;
+      color: #e9c468;
+      border-radius: 13px 13px 3px 13px;
+      margin: 3px 0;
+      padding: 7px 14px;
+      text-align: left;
+      max-width: 95%;
+      align-self: flex-start;
+      font-family: 'Montserrat';
+    }
+    .chatbox-row {
+      width: 100%;
+      display: flex;
+      gap: 7px;
+      margin-bottom: 0.5rem;
+    }
+    .chatbox-input {
+      flex: 1;
+      border-radius: 10px;
+      border: 1.5px solid #e9c46842;
+      background: #2d261ab3;
+      color: #fffbe9;
+      padding: 0.58rem 1rem;
+      font-size: 1.04rem;
+      font-family: 'Montserrat';
+      outline: none;
+    }
+    .chatbox-btn {
+      background: #e9c468;
+      color: #232526;
+      border: none;
+      border-radius: 9px;
+      font-family: 'Orbitron';
+      font-size: 1.01rem;
+      padding: 0.57rem 1.3rem;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 3px;
+      transition: background 0.17s, color 0.17s;
+    }
+    .chatbox-btn:hover {
+      background: #191b23;
+      color: #e9c468;
+    }
+    .curiosidades {
+      background: rgba(64,54,30,0.43);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem 1rem 1.4rem;
+      color: #e6dec7;
+      box-shadow: 0 2px 16px #ecc96e13;
+      font-size: 1.02rem;
+      margin-bottom: 2.1rem;
+      width: 100%;
+      opacity: 0.94;
+    }
+    .curiosidades ul {margin:0; padding-left:1rem; list-style: disc;}
+    .curiosidades li {margin-bottom:0.45rem; transition: color 0.22s;}
+    .curiosidades li:hover {color:#e9c468;}
+    .contact-box {
+      background: rgba(66,63,41,0.7);
+      border-radius: 13px;
+      box-shadow: 0 2px 10px #c2a95433;
+      padding: 1.2rem 1rem 0.9rem 1rem;
+      color: #f3eedc;
+      font-size: 1rem;
+      margin-bottom: 1.1rem;
+      width: 100%;
+      opacity: 0.96;
+    }
+    .contact-input, .contact-textarea {
+      margin:0.6rem 0; width:93%; padding:0.7rem; border-radius:8px; border:none; font-size:0.97rem; box-shadow: 0 1px 4px #dac06210; background:#222730; color:#fff; transition: box-shadow 0.3s;
+    }
+    .contact-input:focus, .contact-textarea:focus {outline:none; box-shadow: 0 5px 19px #e9c46810;}
+    .contact-btn {margin-top:0.92rem;background:#e9c468;color:#232526;border:none;padding:0.57rem 2rem;border-radius:11px;font-family:'Orbitron';cursor:pointer;font-size:0.97rem;}
+    .contact-btn:hover {background:#191b23;color:#e9c468;}
+    footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      padding: 1rem 0 0.5rem 0;
+      font-size: 0.92rem;
+      color: #dcc793;
+      background: none;
+      border-top-right-radius: 18px;
+      border-top-left-radius: 18px;
+      opacity: 0.93;
+    }
+    @media (max-width:700px) {
+      h1{font-size:1.5rem;}
+      .logo-album{width:55px;}
+      .main-glass{padding: 1.2rem 0.5rem;}
+      .avatar-img{width:90px;height:90px;}
+      .curiosidades,.contact-box{padding:1rem;}
+    }
+  </style>
+</head>
+<body>
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="TU_VIDEO_RAM.mp4" type="video/mp4">
+    Tu navegador no soporta videos en el fondo.
+  </video>
+  <div class="overlay"></div>
+  <header>
+    <img src="ram_logo.png" alt="Logo Random Access Memories" class="logo-album">
+    <h1>Random Access Memories AI</h1>
+    <div class="subtitle">Inteligencia artificial + Daft Punk • Una experiencia única basada en RAM</div>
+    <nav>
+      <a href="#ia">IA</a>
+      <a href="#curiosidades">Curiosidades</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+  <main>
+    <div class="main-glass">
+      <div class="daftpunk-head" id="ia">
+        <img src="ram_head.png" alt="Avatar Daft Punk RAM" class="avatar-img">
+        <div class="avatar-label">RAM Bot</div>
+      </div>
+      <div class="chatbot-area" id="chatbot-area">
+        <div class="chat-history" id="chat-history"></div>
+        <form class="chatbox-row" id="chat-form">
+          <input id="chat-input" class="chatbox-input" type="text" placeholder="Escribe tu pregunta..." autocomplete="off" required>
+          <button class="chatbox-btn" type="submit">Enviar</button>
+        </form>
+      </div>
+      <div class="curiosidades" id="curiosidades">
+        <ul>
+          <li>Lanzado en 2013, RAM ganó el Grammy a "Álbum del año".</li>
+          <li>Contó con colaboraciones legendarias: Pharrell Williams, Nile Rodgers y Giorgio Moroder.</li>
+          <li>Mezcla electrónica, disco, funk y elementos analógicos para crear un sonido retro-futurista.</li>
+          <li>“Get Lucky” se convirtió en un himno global y uno de los éxitos más grandes de Daft Punk.</li>
+          <li>El álbum destaca la importancia de la música hecha a mano, con instrumentos reales y estudio tradicional.</li>
+        </ul>
+      </div>
+      <div class="contact-box" id="contacto">
+        <form onsubmit="event.preventDefault(); showModal('contacto');">
+          <input type="text" class="contact-input" placeholder="Tu nombre" required><br>
+          <input type="email" class="contact-input" placeholder="Correo electrónico" required><br>
+          <textarea class="contact-textarea" rows="3" placeholder="Mensaje"></textarea><br>
+          <button type="submit" class="contact-btn">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer>
+    Proyecto IA | Daft Punk RAM • 2025<br>
+    <span style="color:#e9c468;opacity:0.55;">Celebrando la elegancia, innovación y magia de Random Access Memories</span>
+  </footer>
+  <div class="modal" id="modal"><div class="modal-content" id="modal-content"></div></div>
+  <script>
+    // -------------- CHATBOT AZURE INTEGRACIÓN --------------
+    const endpoint = "https://qia-bot-adab-apim.azure-api.net/";  // Cambia si tu endpoint requiere subruta, ej: /ask
+    const apiKey = "TU_API_KEY_AQUI"; // Pon aquí tu API Key segura
+
+    async function consultaAzureBot(pregunta) {
+      const body = { question: pregunta }; // cámbialo si tu API espera otro campo
+      const resp = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Ocp-Apim-Subscription-Key": apiKey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (resp.ok) {
+        try {
+          const data = await resp.json();
+          // Ajusta aquí según la estructura de respuesta de tu API
+          return data.answer || data.respuesta || JSON.stringify(data);
+        } catch (e) {
+          return "Ocurrió un error al leer la respuesta del bot.";
+        }
+      } else {
+        return "Error al conectarse con el bot. Código: " + resp.status;
+      }
+    }
+
+    // -------------- CHAT BOT UI --------------
+    const chatForm = document.getElementById("chat-form");
+    const chatInput = document.getElementById("chat-input");
+    const chatHistory = document.getElementById("chat-history");
+
+    chatForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const pregunta = chatInput.value.trim();
+      if(!pregunta) return;
+      agregarBurbuja(pregunta, "user");
+      chatInput.value = "";
+      agregarBurbuja("...", "bot");
+      const respuesta = await consultaAzureBot(pregunta);
+      quitarUltimaBurbuja();
+      agregarBurbuja(respuesta, "bot");
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    });
+
+    function agregarBurbuja(texto, tipo) {
+      const div = document.createElement("div");
+      div.className = "chat-bubble " + tipo;
+      div.textContent = texto;
+      chatHistory.appendChild(div);
+    }
+    function quitarUltimaBurbuja() {
+      if(chatHistory.lastChild) chatHistory.removeChild(chatHistory.lastChild);
+    }
+
+    // ---------- MODAL CONTACTO ----------
+    function showModal(tipo) {
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `<h2>¡Gracias!</h2>
+        <p>Tu mensaje ha sido enviado.<br>Te responderemos muy pronto.</p>
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>`;
+      modal.style.display = 'flex';
+    }
+    function closeModal() {document.getElementById('modal').style.display = 'none';}
+    window.onclick = function(e) {const modal=document.getElementById('modal');if(e.target===modal)closeModal();}
+  </script>
+</body>
+</html>
