@@ -46,7 +46,19 @@
     .player-slider{flex:1;margin:0 0.5em;accent-color:#e9c468;height:4.5px;border-radius:7px;background:linear-gradient(90deg,#efd99e 60%,#e9c468 100%);box-shadow:0 2px 7px #ffd18144;}
     .player-slider:focus{box-shadow:0 3px 13px #ffeec0aa;}
     .player-time{color:#efe2b5;font-family:'Orbitron';font-size:0.95rem;letter-spacing:1px;margin:0 0.3em;min-width:44px;text-align:center;}
-    .lyricsbox{margin:2.2em auto 0 auto;background:rgba(28,20,11,0.93);border-radius:16px;box-shadow:0 0 20px #ffd18132;padding:1.4em 1.2em 1.1em 1.2em;color:#ffeec0;font-family:'Montserrat',Arial,sans-serif;font-size:1.14em;line-height:1.7;text-align:center;max-width:350px;border:1.5px solid #e9c46877;min-height:146px;}
+    .lyricsbox{
+      margin:2.2em auto 0 auto;
+      background:rgba(28,20,11,0.93);
+      border-radius:16px;
+      box-shadow:0 0 20px #ffd18132;
+      padding:1.4em 1.2em 1.1em 1.2em;
+      color:#ffeec0;
+      font-family:'Montserrat',Arial,sans-serif;
+      font-size:1.14em;line-height:1.7;text-align:center;
+      max-width:350px;
+      border:1.5px solid #e9c46877;
+      min-height:146px;
+    }
     footer {margin-top:2.4rem;text-align:center;padding:1.6rem 0 1rem 0;font-size:1.03rem;color:#e6dec7;background:none;border-top-right-radius: 18px;border-top-left-radius: 18px;opacity: 0.93;}
     .footer-info {color:#fdc960;font-size:1.06em;margin-bottom:0.5em;font-family:'Montserrat';letter-spacing:1px;font-weight:500;text-align:center;display:block;}
     @media (max-width:1120px){
@@ -108,7 +120,7 @@
           </iframe>
         </div>
       </div>
-      <!-- Reproductor derecha y lyricKaraoke -->
+      <!-- Reproductor y letra derecha -->
       <div style="display:flex;flex-direction:column;align-items:center;flex:1;" class="playerpanel">
         <span class="player-title">Reproductor RAM <b>AI Edition</b></span>
         <div class="player-coverbox">
@@ -127,7 +139,6 @@
           <span class="player-time" id="duration">0:00</span>
         </div>
         <audio id="audioPlayer"><source id="audioSource" src=""></audio>
-        <!-- Letra completa -->
         <div class="lyricsbox" id="lyricsbox"></div>
       </div>
     </div>
@@ -137,28 +148,27 @@
     Celebrando la elegancia, innovación y magia de Random Access Memories
   </footer>
   <script>
-    // TRACKS
-    const songFiles = [
-      "Give Life Back to Music.mp3","The Game of Love.mp3","Giorgio by Moroder.mp3","Within.mp3","Instant Crush (feat. Julian Casablancas).mp3","Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3","Touch (feat. Paul Williams).mp3","Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3","Beyond.mp3","Motherboard.mp3","Fragments of Time (feat. Todd Edwards).mp3","Doin' it Right (feat. Panda Bear).mp3","Contact.mp3"
-    ];
-    const songsMeta = {
-      "Give Life Back to Music.mp3": {cover:"cover.jpg",name:"Give Life Back to Music",artist:"Daft Punk · RAM"},
-      "The Game of Love.mp3": {cover:"cover.jpg",name:"The Game of Love",artist:"Daft Punk · RAM"},
-      "Giorgio by Moroder.mp3": {cover:"cover.jpg",name:"Giorgio by Moroder",artist:"Daft Punk ft. Giorgio Moroder"},
-      "Within.mp3":{cover:"cover.jpg",name:"Within",artist:"Daft Punk · RAM"},
-      "Instant Crush (feat. Julian Casablancas).mp3": {cover:"cover.jpg",name:"Instant Crush",artist:"Daft Punk ft. Julian Casablancas"},
-      "Lose Yourself to Dance (feat. Pharrell Williams).mp3": {cover:"cover.jpg",name:"Lose Yourself to Dance",artist:"Daft Punk ft. Pharrell & Nile"},
-      "Touch (feat. Paul Williams).mp3": {cover:"cover.jpg",name:"Touch",artist:"Daft Punk ft. Paul Williams"},
-      "Get Lucky (feat. Pharrell Williams and Nile Rodgers).mp3": {cover:"cover.jpg",name:"Get Lucky",artist:"Daft Punk ft. Pharrell & Nile"},
-      "Beyond.mp3": {cover:"cover.jpg",name:"Beyond",artist:"Daft Punk · RAM"},
-      "Motherboard.mp3": {cover:"cover.jpg",name:"Motherboard",artist:"Daft Punk · RAM"},
-      "Fragments of Time (feat. Todd Edwards).mp3": {cover:"cover.jpg",name:"Fragments of Time",artist:"Daft Punk ft. Todd Edwards"},
-      "Doin' it Right (feat. Panda Bear).mp3": {cover:"cover.jpg",name:"Doin' it Right",artist:"Daft Punk ft. Panda Bear"},
-      "Contact.mp3": {cover:"cover.jpg",name:"Contact",artist:"Daft Punk · RAM"}
-    };
-    // Letras completas (puedes seguir agregando aquí de modo directo/copiado)
-    const lyricsFull = {
-      "Give Life Back to Music.mp3": `Let the music in tonight
+const songFiles = [
+  "Give Life Back to Music.mp3","The Game of Love.mp3","Giorgio by Moroder.mp3","Within.mp3","Instant Crush (feat. Julian Casablancas).mp3","Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3","Touch (feat. Paul Williams).mp3","Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3","Beyond.mp3","Motherboard.mp3","Fragments of Time (feat. Todd Edwards).mp3","Doin' it Right (feat. Panda Bear).mp3","Contact.mp3"
+];
+const songsMeta = {
+  "Give Life Back to Music.mp3": {cover:"cover.jpg",name:"Give Life Back to Music",artist:"Daft Punk · RAM"},
+  "The Game of Love.mp3": {cover:"cover.jpg",name:"The Game of Love",artist:"Daft Punk · RAM"},
+  "Giorgio by Moroder.mp3": {cover:"cover.jpg",name:"Giorgio by Moroder",artist:"Daft Punk ft. Giorgio Moroder"},
+  "Within.mp3":{cover:"cover.jpg",name:"Within",artist:"Daft Punk · RAM"},
+  "Instant Crush (feat. Julian Casablancas).mp3": {cover:"cover.jpg",name:"Instant Crush",artist:"Daft Punk ft. Julian Casablancas"},
+  "Lose Yourself to Dance (feat. Pharrell Williams).mp3": {cover:"cover.jpg",name:"Lose Yourself to Dance",artist:"Daft Punk ft. Pharrell & Nile"},
+  "Touch (feat. Paul Williams).mp3": {cover:"cover.jpg",name:"Touch",artist:"Daft Punk ft. Paul Williams"},
+  "Get Lucky (feat. Pharrell Williams and Nile Rodgers).mp3": {cover:"cover.jpg",name:"Get Lucky",artist:"Daft Punk ft. Pharrell & Nile"},
+  "Beyond.mp3": {cover:"cover.jpg",name:"Beyond",artist:"Daft Punk · RAM"},
+  "Motherboard.mp3": {cover:"cover.jpg",name:"Motherboard",artist:"Daft Punk · RAM"},
+  "Fragments of Time (feat. Todd Edwards).mp3": {cover:"cover.jpg",name:"Fragments of Time",artist:"Daft Punk ft. Todd Edwards"},
+  "Doin' it Right (feat. Panda Bear).mp3": {cover:"cover.jpg",name:"Doin' it Right",artist:"Daft Punk ft. Panda Bear"},
+  "Contact.mp3": {cover:"cover.jpg",name:"Contact",artist:"Daft Punk · RAM"}
+};
+// Letras completas (puedes seguir añadiendo aquí)
+const lyricsFull = {
+  "Give Life Back to Music.mp3": `Let the music in tonight
 Just turn on the music
 Let the music of your life
 Give life back to music
@@ -192,88 +202,307 @@ Let the music in tonight
 Just turn on the music
 Let the music of your life
 Give life back to music`,
-
-      "The Game of Love.mp3": `Tell me just what you want me to be
+  "The Game of Love.mp3": `Tell me just what you want me to be
 One kiss and boom, you're the only one for me
 So please tell me why don't you come around no more
 'Cause right now I'm crying outside the door of your candy store
-...`,
-
-      "Giorgio by Moroder.mp3": `When I was fifteen, sixteen, when I really started to play guitar
+It just takes a little bit of this, a little bit of that
+It started with a kiss, now we're up to bat
+A little bit of laughs, a little bit of pain
+I'm tellin' you, my babe, it's all in the game of love
+This, whatever you make it to be
+Sunshine will set on this cold lonely sea
+So please, baby, try and use me for what I'm good for
+It ain't sayin' goodbye, that's knockin' down the door of your candy store
+It just takes a little bit of this, a little bit of that
+It started with a kiss, now we're up to bat
+A little bit of laughs, a little bit of pain
+I'm tellin' you, my babe, it's all in the game of love
+It's all in this game of love
+You roll me, control me, console me, please hold me
+You guide me, divide me into what
+So please tell me why don't you come 'round no more
+'Cause right now I'm dying outside the door of your lovin' store
+It just takes a little bit of this, a little bit of that
+It started with a kiss, now we're up to bat
+A little bit of laughs, a little bit of pain
+I'm tellin' you, my babe, it's all in the game of love
+It's all in this game of love
+It's all in the game of love
+Let's play the game of love
+Roll me, control me, please hold me
+A little bit of laughs, a little bit of pain (Make me feel good, yeah)
+A little bit of laughs, a little bit of pain
+(Now here on my own, on my own)
+A little bit of this, a little bit of that
+A little bit of laughs, a little bit of pain`,
+  "Giorgio by Moroder.mp3": `When I was fifteen, sixteen, when I really started to play guitar
 I definitely wanted to become a musician
-...`,
+It was almost impossible because, it was, the dream was so big
+That I didn't see any chance because
+I was living in a little town, was studying
+And when I finally broke away from school and became a musician
+I thought: Well, now I may have a little bit of a chance
+Because all I really wanted to do is music
+And not only play music, but compose music
+At that time, in Germany, in '69, '70, they had already discotheques
+So, I would take my car, would go to a discotheque
+Sing maybe thirty minutes
+I think I had about seven, eight songs
+I would partially sleep in the car
+Because I didn't want to drive home and that helped me for about
+Almost two years to survive in the beginning
+I wanted to do an album with the sounds of the '50s
+The sounds of the '60s, of the '70s
+And then have a sound of the future
+And I said: Wait a second, I know the synthesizer
+Why don't I use the synthesizer which is the sound of the future?
+And I didn't have any idea what to do
+But I knew I needed a click, so we put a click on the 24-track
+Which then was synced to the Moog Modular
+I knew that could be a sound of the future
+But I didn't realize how much the impact would be
+My name is Giovanni Giorgio
+But everybody calls me Giorgio
 
-      "Within.mp3": `There are so many things that I don't understand
+Once you free your mind about a concept of
+Harmony and of music being correct
+You can do whatever you want
+So, nobody told me what to do
+And there was no preconception of what to do`,
+  "Within.mp3": `There are so many things that I don't understand
 There's a world within me that I cannot explain
-...`,
-
-      "Instant Crush (feat. Julian Casablancas).mp3": `I didn't want to be the one to forget
+Many rooms to explore, but the doors look the same
+I am lost, I can't even remember my name
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am
+There are so many things that I don't understand
+There's a world within me that I cannot explain
+Many rooms to explore, but the doors look the same
+(Where are the locks to try the key?)
+I am lost, I can't even remember my name
+(And I wonder why)
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am
+I've been, for some time
+Looking for someone
+I need to know now
+Please tell me who I am`,
+  "Instant Crush (feat. Julian Casablancas).mp3": `I didn't want to be the one to forget
 I thought of everything I'd never regret
-...`,
+A little time with you is all that I get
+That's all we need, because it's all we can take
+One thing I never see the same when your 'round
+I don't believe in him, his lips on the ground
+I wanna take you to that place in the Roche
+But no one gives us any time anymore
 
-      "Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3": `I know you don't get a chance to take a break this often
+He ask me once if I'd look in on his dog
+You made an offer for it, then you ran off
+I got this picture of us kids in my head
+And all I hear is the last thing that you said
+I listened to your problems, now listen to mine
+I didn't want to anymore, oh oh oh
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+'Cause I know it unlocks like a door
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+Some more again
+
+It didn't matter what they wanted to see
+He thought he saw someone that looked just like me
+The summer memory that just never dies
+We worked too long and hard to give it no time
+He sees right through me, it's so easy with lies
+Cracks in the road that I would try and disguise
+He runs his scissor at the seem in the wall
+He cannot break it down or else he would fall
+
+One thousand lonely stars hiding in the cold
+Take it, I don't wanna sing anymore
+
+I listened to your problems, now listen to mine
+I didn't want to anymore, oh oh oh
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+'Cause I know it unlocks like a door
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+'Cause I know it unlocks like a–
+
+I don't understand, don't get upset, I'm not with you
+We're swimming around, it's all I do when I'm with you
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+'Cause I know it unlocks like a door
+
+And we will never be alone again
+'Cause it doesn't happen every day
+Kinda counted on you being a friend
+Can I give it up or give it away?
+Now I thought about what I wanna say
+But I never really know where to go
+So I chained myself to a friend
+'Cause I know it unlocks like a door`,
+  // (Sigue igual con el resto de canciones: agrega aquí tus letras copias)
+  "Lose Yourself to Dance (feat. Pharrell Williams & Nile Rodgers).mp3": `I know you don't get a chance to take a break this often
 I know your life is speeding and it isn't stopping
+Here, take my shirt and just go ahead and wipe up all the
+Sweat, sweat, sweat
+Lose yourself to dance
+Lose yourself to dance
+Lose yourself to dance
+Lose yourself to dance
+Lose yourself to dance
+Lose yourself to dance
+Lose yourself to dance
 ...`,
-
-      "Touch (feat. Paul Williams).mp3": `Touch, touch
+  "Touch (feat. Paul Williams).mp3": `Touch, touch
 I remember touch
-...`,
+Touch, touch
+I remember touch
+Where do I belong?
+Touch, I need something more
+I remember touch
+I need something more in my mind
 
-      "Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3": `Like the legend of the phoenix
+Touch, I remember touch
+Pictures came with touch
+A painter in my mind
+Tell me what you see
+A tourist in a dream
+A visitor, it seems
+A half-forgotten song
+Where do I belong?
+Tell me what you see
+I need something more
+
+Kiss, suddenly alive
+Happiness arrive
+Hunger like a storm
+How do I begin?
+A room within a room
+A door behind a door
+Touch, where do you lead?
+I need something more
+Tell me what you see
+I need something more
+
+Home, hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're home
+Hold on, if love is the answer, you're
+
+Hold on, if love is the answer, you're home
+Let it go all night ...`,
+  "Get Lucky (feat. Pharrell Williams & Nile Rodgers).mp3": `Like the legend of the phoenix
 All ends with beginnings
-...`,
-
-      "Beyond.mp3": `Dream beyond dreams
+...
+We're up all night to get lucky`,
+  "Beyond.mp3": `Dream beyond dreams
 Beyond life
-...`,
-
-      "Fragments of Time (feat. Todd Edwards).mp3": `Driving this road down to paradise
+You will find your song
+...
+The perfect song is framed with silence
+It speaks of places never seen`,
+  "Fragments of Time (feat. Todd Edwards).mp3": `Driving this road down to paradise
 Letting the sunlight into my eyes
-...`,
-
-      "Doin' it Right (feat. Panda Bear).mp3": `Doing it right
+...
+These moments will shine`,
+  "Doin' it Right (feat. Panda Bear).mp3": `Doing it right
 Everybody will be dancing and we'll feeling it right
-...`,
-
-      "Motherboard.mp3":"(Instrumental track)",
-      "Contact.mp3":"(Instrumental/No official lyrics)"
-    };
-
-    // --- Player logic
-    const audioPlayer = document.getElementById("audioPlayer"), audioSource = document.getElementById("audioSource");
-    const playPauseBtn = document.getElementById("playPauseBtn"), nextBtn = document.getElementById("nextBtn"), prevBtn = document.getElementById("prevBtn"), seekBar = document.getElementById("seekBar");
-    const currentTime = document.getElementById("currentTime"), duration = document.getElementById("duration");
-    const coverArt = document.getElementById("coverArt"), songName = document.getElementById("songName"), songArtist = document.getElementById("songArtist"), songListBox = document.getElementById("songList"), lyricsbox = document.getElementById("lyricsbox");
-    let currentSongIndex=0, isPlaying=false;
-    function loadSong(idx){
-      const song = songFiles[idx], meta=songsMeta[song];
-      Array.from(songListBox.getElementsByClassName('songitem')).forEach((el,i)=>el.classList.toggle('selected',i===idx));
-      audioSource.src = song;
-      coverArt.src = meta.cover;songName.textContent = meta.name;songArtist.textContent = meta.artist;
-      audioPlayer.load();isPlaying=false;updatePlayPause();setTimeout(updateTimes,400);
-      lyricsbox.innerHTML = lyricsFull[song] ? lyricsFull[song].replace(/\n/g,"<br>") : "Letra no disponible...";
-    }
-    playPauseBtn.onclick=()=>{isPlaying?audioPlayer.pause():audioPlayer.play();};
-    nextBtn.onclick=()=>{currentSongIndex=(currentSongIndex+1)%songFiles.length;loadSong(currentSongIndex);playAudio();};
-    prevBtn.onclick=()=>{currentSongIndex=(currentSongIndex-1+songFiles.length)%songFiles.length;loadSong(currentSongIndex);playAudio();};
-    audioPlayer.onplay=()=>{isPlaying=true;updatePlayPause();};
-    audioPlayer.onpause=()=>{isPlaying=false;updatePlayPause();};
-    audioPlayer.onended=()=>{nextBtn.click();};
-    function updatePlayPause(){playPauseBtn.innerHTML=isPlaying?'&#10073;&#10073;':'&#9658;';}
-    function playAudio(){audioPlayer.play();}
-    audioPlayer.ontimeupdate=updateTimes;
-    seekBar.oninput=function(){audioPlayer.currentTime=this.value*audioPlayer.duration/100;};
-    audioPlayer.onloadedmetadata=updateTimes;
-    function updateTimes(){
-      if(audioPlayer.duration){
-        let cur=audioPlayer.currentTime;let dur=audioPlayer.duration;
-        seekBar.value=Math.floor((cur/dur)*100)||0;
-        currentTime.textContent=formatTime(cur);duration.textContent=formatTime(dur);}
-      else {currentTime.textContent="0:00";duration.textContent="0:00";seekBar.value=0;}
-    }
-    function formatTime(s){s=Math.floor(s);let min=Math.floor(s/60);let sec=s%60;return `${min}:${sec<10?'0'+sec:sec}`;}
-    Array.from(songListBox.getElementsByClassName('songitem')).forEach((li,i)=>li.onclick=function(){currentSongIndex=i;loadSong(i);playAudio();});
-    loadSong(currentSongIndex);
-  </script>
+...
+If you lose your way tonight
+That's how you know the magic's right`,
+  "Motherboard.mp3":"(Instrumental track)",
+  "Contact.mp3":"(Instrumental/No official lyrics)"
+};
+// --- Player logic (igual)
+const audioPlayer = document.getElementById("audioPlayer"), audioSource = document.getElementById("audioSource");
+const playPauseBtn = document.getElementById("playPauseBtn"), nextBtn = document.getElementById("nextBtn"), prevBtn = document.getElementById("prevBtn"), seekBar = document.getElementById("seekBar");
+const currentTime = document.getElementById("currentTime"), duration = document.getElementById("duration");
+const coverArt = document.getElementById("coverArt"), songName = document.getElementById("songName"), songArtist = document.getElementById("songArtist"), songListBox = document.getElementById("songList"), lyricsbox = document.getElementById("lyricsbox");
+let currentSongIndex=0, isPlaying=false;
+function loadSong(idx){
+  const song = songFiles[idx], meta=songsMeta[song];
+  Array.from(songListBox.getElementsByClassName('songitem')).forEach((el,i)=>el.classList.toggle('selected',i===idx));
+  audioSource.src = song;
+  coverArt.src = meta.cover;songName.textContent = meta.name;songArtist.textContent = meta.artist;
+  audioPlayer.load();isPlaying=false;updatePlayPause();setTimeout(updateTimes,400);
+  lyricsbox.innerHTML = lyricsFull[song] ? lyricsFull[song].replace(/\n/g,"<br>") : "Letra no disponible...";
+}
+playPauseBtn.onclick=()=>{isPlaying?audioPlayer.pause():audioPlayer.play();};
+nextBtn.onclick=()=>{currentSongIndex=(currentSongIndex+1)%songFiles.length;loadSong(currentSongIndex);playAudio();};
+prevBtn.onclick=()=>{currentSongIndex=(currentSongIndex-1+songFiles.length)%songFiles.length;loadSong(currentSongIndex);playAudio();};
+audioPlayer.onplay=()=>{isPlaying=true;updatePlayPause();};
+audioPlayer.onpause=()=>{isPlaying=false;updatePlayPause();};
+audioPlayer.onended=()=>{nextBtn.click();};
+function updatePlayPause(){playPauseBtn.innerHTML=isPlaying?'&#10073;&#10073;':'&#9658;';}
+function playAudio(){audioPlayer.play();}
+audioPlayer.ontimeupdate=updateTimes;
+seekBar.oninput=function(){audioPlayer.currentTime=this.value*audioPlayer.duration/100;};
+audioPlayer.onloadedmetadata=updateTimes;
+function updateTimes(){
+  if(audioPlayer.duration){
+    let cur=audioPlayer.currentTime;let dur=audioPlayer.duration;
+    seekBar.value=Math.floor((cur/dur)*100)||0;
+    currentTime.textContent=formatTime(cur);duration.textContent=formatTime(dur);}
+  else {currentTime.textContent="0:00";duration.textContent="0:00";seekBar.value=0;}
+}
+function formatTime(s){s=Math.floor(s);let min=Math.floor(s/60);let sec=s%60;return `${min}:${sec<10?'0'+sec:sec}`;}
+Array.from(songListBox.getElementsByClassName('songitem')).forEach((li,i)=>li.onclick=function(){currentSongIndex=i;loadSong(i);playAudio();});
+loadSong(currentSongIndex);
+</script>
 </body>
 </html>
