@@ -110,16 +110,46 @@
         </ul>
       </div>
       <!-- IA BOT -->
-      <div class="ia-box">
-        <img src="cabeza.jpg" class="ia-avatar" alt="RAM Bot">
-        <div class="ia-label">RAM Bot</div>
-        <div class="chatbot-area" id="chatbot-area">
-          <iframe 
-            src="https://webchat.botframework.com/embed/QIA-bot?s=6EcxB9Y4zOvuJDQmGv3UdIhdsuI2IcMBraBWGeUOKn1CdUctrqDqJQQJ99BJACi5YpzAArohAAABAZBS31ID.4WGzlMKjqJsU6itlfmq9rDlolRPxNtlTP80xmeVeRtLPsadLWLaCJQQJ99BJACi5YpzAArohAAABAZBS2I3j"
-            style="min-width:210px;min-height:340px;border:none;border-radius:13px;" allow="microphone;">
-          </iframe>
-        </div>
-      </div>
+   <!-- IA BOT -->
+<div class="ia-box">
+  <img src="cabeza.jpg" class="ia-avatar" alt="RAM Bot">
+  <div class="ia-label">RAM Bot</div>
+  <div class="chatbot-area ram-bot-panel">
+    <div id="webchat" style="width:100%;height:410px;min-width:210px;"></div>
+  </div>
+</div>
+
+<!-- Fuera del div agrega al final del body: -->
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+<script>
+  window.WebChat.renderWebChat({
+    directLine: window.WebChat.createDirectLine({ token: '6EcxB9Y4zOvuJDQmGv3UdIhdsuI2IcMBraBWGeUOKn1CdUctrqDqJQQJ99BJACi5YpzAArohAAABAZBS31ID.4WGzlMKjqJsU6itlfmq9rDlolRPxNtlTP80xmeVeRtLPsadLWLaCJQQJ99BJACi5YpzAArohAAABAZBS2I3j' }),
+    styleOptions: {
+      backgroundColor: 'rgba(28,20,11,0.97)',
+      botAvatarImage: 'cabeza.jpg',
+      botAvatarInitials: 'DP',
+      botAvatarBackgroundColor: "#e9c468",
+      userAvatarInitials: 'YO',
+      userAvatarBackgroundColor: '#ffeec0',
+      primaryFont: 'Montserrat, Arial, sans-serif',
+      bubbleFromUserBackground: '#e9c468',
+      bubbleFromUserTextColor: '#181818',
+      bubbleBackground: '#181818',
+      bubbleBorderColor: '#e9c46899',
+      bubbleTextColor: '#ffeec0',
+      sendBoxBackground: '#222',
+      sendBoxTextColor: '#ffeec0',
+      accent: '#e9c468',
+      suggestedActionBorderColor: '#e9c468',
+      suggestedActionBackground: '#fffbe966',
+      suggestedActionTextColor: '#232526',
+      paddingRegular: 16,
+      paddingWide: 22,
+      borderRadius: 18,
+      hideUploadButton: false
+    }
+  }, document.getElementById('webchat'));
+</script>
       <!-- Reproductor y letra derecha -->
       <div style="display:flex;flex-direction:column;align-items:center;flex:1;" class="playerpanel">
         <span class="player-title">Reproductor RAM <b>AI Edition</b></span>
