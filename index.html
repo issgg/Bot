@@ -6,100 +6,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="logo-top.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- ========== ESTILOS PANTALLA DE INICIO + TU CSS ========== -->
   <style>
-    /* PANTALLA DE CARGA */
-    #pantalla-carga {
-      position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 10000;
-      display: flex; flex-direction:column; align-items:center; justify-content:center;
-      background: radial-gradient(circle at 60% 44%, #ffeec018 0%, #181818 120%);
-      pointer-events: all;
-      transition: opacity 1s cubic-bezier(.61,-0.01,.37,.99);
+    #pantalla-carga-inicio {
+      position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
+      background:#181818;transition:opacity .9s cubic-bezier(.67,-0.17,.46,1.13),filter 0.6s;pointer-events:all;
     }
-    #pantalla-carga.hide {
-      opacity: 0; pointer-events: none; filter: blur(22px) brightness(1.2);
-      transition: opacity 0.9s cubic-bezier(.67,-0.17,.46,1.16), filter 0.6s;
+    #pantalla-carga-inicio.hide {
+      opacity:0;pointer-events:none;filter:blur(19px) brightness(1.1) grayscale(0.1);
+      transition:opacity .9s cubic-bezier(.67,-0.17,.46,1.13),filter 1.2s;
     }
-    #pantalla-carga-logo {
-      width:132px;height:132px; margin-bottom: 2.3rem; 
-      filter: drop-shadow(0 0 36px #ffeec077) drop-shadow(0 0 26px #e9c468cc);
-      animation: glowlogo 2s infinite alternate;
+    #video-carga-inicio {
+      position:absolute;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:0;
+      filter:brightness(.87) blur(1.2px) saturate(1.23);pointer-events:none;
     }
-    @keyframes glowlogo {
-      0% { filter: drop-shadow(0 0 18px #ffeec044) drop-shadow(0 0 8px #e9c468cc);}
-      100% { filter: drop-shadow(0 0 34px #ffeec099) drop-shadow(0 0 46px #e9c468ee);}
+    #overlay-carga-video {
+      position:absolute;left:0;top:0;width:100vw;height:100vh;
+      background:linear-gradient(120deg,#0c0a04ea 75%,#1e1411e0 100%);
+      z-index:1;pointer-events:none;
     }
-    #pantalla-carga-h1 {
-      font-family: 'Orbitron'; letter-spacing: 3.2px; font-size: 2.18em;
-      color: #ffeec0; text-shadow:0 0 30px #ffeec022,0 2px 24px #e9c46844,0 1px 10px #fffbe9aa;
-      margin:0 0 1.4rem 0; animation: flicker 1.2s infinite alternate;
+    .contenedor-bienvenida-inicio {
+      position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:2.7em 2.2em 2.6em 2.2em;width:90vw;max-width:380px;
+      background:rgba(21,15,7,0.97);border-radius:34px;box-shadow:0 0 100px #ffeec055,0 0 60px #e9c46833;
+      border:2px solid #ffeec091;
     }
-    @keyframes flicker {
-      0%   { opacity:1; filter: brightness(1);}
-      94%  { opacity:.90;}
-      96%  { opacity:.60; filter:brightness(.84);}
-      98%  { opacity:1; }
-      100% { opacity:.95; }
+    .logo-bienvenida-inicio {
+      width:124px;height:124px;margin-bottom:1.66em;
+      filter:drop-shadow(0 0 25px #e9c468) drop-shadow(0 0 15px #ffeec066);
+      animation:glowlogo 2.4s infinite alternate;
     }
-    #pantalla-carga-desc {
-      color: #ffeec0dd; font-size: 1.17em; font-family: 'Montserrat';
-      margin-bottom: 2.5em; text-shadow: 0 0 10px #ffd18111;
-      text-align:center;
-      animation:descIn 1.9s;
+    @keyframes glowlogo { 0%{filter:drop-shadow(0 0 10px #ffeec077);} 100%{filter:drop-shadow(0 0 44px #ffeec0bb);} }
+    .titulo-bienvenida-inicio {
+      font-family:'Orbitron';font-size:2.30em;letter-spacing:3.7px; color:#ffeec0; text-align:center;
+      text-shadow:0 0 29px #ffeec026,0 2px 21px #e9c46899,0 1px 7px #fffbe9cc;
+      margin-bottom:.22em;margin-top:-1em;animation:flicker 2s infinite alternate;
     }
-    @keyframes descIn {from{opacity:0;transform:translateY(40px);}to{opacity:1;}}
-    #pantalla-carga-boton {
-      padding:1em 2.5em;font-size:1.23em; font-family:'Orbitron';
-      border-radius: 19px;background:#e9c468;color:#181818;font-weight:bold;border:none;box-shadow:0 1px 16px #e9c46844;cursor:pointer;
-      transition: background 0.18s, color 0.16s, filter 0.2s, transform 0.18s;
-      outline: none; border: none;
-      letter-spacing:1.2px;
-      animation: pulse 1.4s infinite alternate;
+    @keyframes flicker{0%{opacity:.93;}93%{opacity:.98;}97%{opacity:.55;}100%{opacity:.97;}}
+    .desc-bienvenida-inicio {
+      color:#ffeec0de;font-size:1.15em;font-family:'Montserrat';margin-bottom:2.17em;text-align:center;text-shadow:0 0 13px #ffd1811a;animation:descIn 1.4s;}
+    @keyframes descIn {from{opacity:0;transform:translateY(30px);}to{opacity:1;}}
+    .boton-bienvenida-inicio {
+      padding:1em 2.6em;font-size:1.22em;font-family:'Orbitron';border-radius:19px;background:#e9c468;color:#181818;font-weight:bold;border:none;cursor:pointer;
+      box-shadow:0 3px 23px #ffd70044,0 2px 17px #ffeec011;
+      letter-spacing:1.13px;margin-top:.33em;
+      transition: background 0.18s, color 0.13s, filter 0.19s, transform 0.17s;
+      animation:pulseIniciar 1.7s infinite alternate;
+      outline:none;border:none;display:flex;align-items:center;gap:.8em;
     }
-    #pantalla-carga-boton:hover {background:#ffeec0;color:#222;transform:scale(1.07);filter:brightness(1.1);}
-    @keyframes pulse { to{box-shadow:0 1px 34px #ffeec055;} }
-    /* Electric animation background SVG */
-    #pantalla-carga-electric {
-      position:absolute; left:0; top:0; width:100vw; height:100vh;z-index:-1; animation:fadeinBg 2s;
-      pointer-events:none;
-      opacity:0.95;
-      filter: blur(2.5px) brightness(1.1) opacity(0.95);
-    }
-    @keyframes fadeinBg {from{opacity:0;}to{opacity:0.95;}}
-    /* ¡El resto de tu CSS y página debajo sigue igual! */
-  </style>
-</head>
-<body>
-  <!-- PANTALLA DE CARGA RAM -->
-  <div id="pantalla-carga">
-    <svg id="pantalla-carga-electric">
-      <defs>
-        <linearGradient id="elec1" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#ffeec099"/>
-          <stop offset="100%" stop-color="#e9c468" />
-        </linearGradient>
-      </defs>
-      <polyline points="0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180"
-        style="fill:none;stroke:url(#elec1);stroke-width:10;stroke-linecap:round;stroke-dasharray:16,23;filter:url(#blur); opacity:.28;">
-        <animate attributeName="points"
-          dur="2s" repeatCount="indefinite"
-          values="0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180;
-                  0,140 60,180 120,160 180,200 240,140 300,175 360,120 420,180 480,130 540,160 600,120 660,180 720,150 800,200 1024,160;
-                  0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180" />
-      </polyline>
-    </svg>
-    <img id="pantalla-carga-logo" src="logo-top.png" alt="Logo RAM">
-    <h2 id="pantalla-carga-h1">Bienvenido</h2>
-    <div id="pantalla-carga-desc">Random Access Memories<br>AI EXPERIENCE</div>
-    <button id="pantalla-carga-boton">INICIAR</button>
-  </div>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Random Access Memories AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="logo-top.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
+    .boton-bienvenida-inicio:hover{background:#fffbe9;color:#cfa711;transform:scale(1.07);}
+    @keyframes pulseIniciar{to{box-shadow:0 4px 90px #ffeec055;}}
+    .icon-rayito{font-size:1.24em;animation:rayitoGlow 1s infinite alternate;text-shadow:0 0 18px #fffbe9,0 0 26px #ffd700;}
+    @keyframes rayitoGlow{to{color:#fffbe9; text-shadow:0 0 25px #e9c468,0 0 44px #ffd700;}}
+    /* ========== TU CSS AQUI (todo lo de la página) ========== */
     body {margin:0;min-height:100vh;background:#181818;display:flex;flex-direction:column;font-family:'Montserrat',Arial,sans-serif;color:#eae8e6;overflow-x:hidden;}
     #bg-video {position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;filter:brightness(0.52) blur(1px);}
     .overlay {position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(117deg,#161717bf 35%,#2c2a2f88 130%);opacity:0.65;z-index:-1;pointer-events:none;}
@@ -139,19 +100,7 @@
     .player-slider{flex:1;margin:0 0.5em;accent-color:#e9c468;height:4.5px;border-radius:7px;background:linear-gradient(90deg,#efd99e 60%,#e9c468 100%);box-shadow:0 2px 7px #ffd18144;}
     .player-slider:focus{box-shadow:0 3px 13px #ffeec0aa;}
     .player-time{color:#efe2b5;font-family:'Orbitron';font-size:0.95rem;letter-spacing:1px;margin:0 0.3em;min-width:44px;text-align:center;}
-    .lyricsbox{
-      margin:2.2em auto 0 auto;
-      background:rgba(28,20,11,0.93);
-      border-radius:16px;
-      box-shadow:0 0 20px #ffd18132;
-      padding:1.4em 1.2em 1.1em 1.2em;
-      color:#ffeec0;
-      font-family:'Montserrat',Arial,sans-serif;
-      font-size:1.14em;line-height:1.7;text-align:center;
-      max-width:350px;
-      border:1.5px solid #e9c46877;
-      min-height:146px;
-    }
+    .lyricsbox{margin:2.2em auto 0 auto;background:rgba(28,20,11,0.93);border-radius:16px;box-shadow:0 0 20px #ffd18132;padding:1.4em 1.2em 1.1em 1.2em;color:#ffeec0;font-family:'Montserrat',Arial,sans-serif;font-size:1.14em;line-height:1.7;text-align:center;max-width:350px;border:1.5px solid #e9c46877;min-height:146px;}
     footer {margin-top:2.4rem;text-align:center;padding:1.6rem 0 1rem 0;font-size:1.03rem;color:#e6dec7;background:none;border-top-right-radius: 18px;border-top-left-radius: 18px;opacity: 0.93;}
     .footer-info {color:#fdc960;font-size:1.06em;margin-bottom:0.5em;font-family:'Montserrat';letter-spacing:1px;font-weight:500;text-align:center;display:block;}
     @media (max-width:1120px){
@@ -169,108 +118,120 @@
   </style>
 </head>
 <body>
-  <video id="bg-video" autoplay loop muted playsinline><source src="videoplayback (1).mp4" type="video/mp4"></video>
-  <div class="overlay"></div>
-  <img src="logo-top.png" class="icono-top" alt="Logo RAM">
-  <header>
-    <h1>Random Access Memories AI</h1>
-    <div class="subtitle">Inteligencia artificial + Daft Punk · Una experiencia única basada en RAM</div>
-    <nav>
-      <a href="#ia">IA</a>
-      <a href="#curiosidades">Curiosidades</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
-  <main style="flex:1;">
-    <div class="dashboard-wrap">
-      <!-- Lista canciones -->
-      <div class="listbox">
-        <div class="list-title">Canciones RAM</div>
-        <ul class="song-list" id="songList">
-          <li class="songitem" data-idx="0">Give Life Back to Music</li>
-          <li class="songitem" data-idx="1">The Game of Love</li>
-          <li class="songitem" data-idx="2">Giorgio by Moroder</li>
-          <li class="songitem" data-idx="3">Within</li>
-          <li class="songitem" data-idx="4">Instant Crush (feat. Julian Casablancas)</li>
-          <li class="songitem" data-idx="5">Lose Yourself to Dance (feat. Pharrell Williams)</li>
-          <li class="songitem" data-idx="6">Touch (feat. Paul Williams)</li>
-          <li class="songitem" data-idx="7">Get Lucky (feat. Pharrell Williams and Nile Rodgers)</li>
-          <li class="songitem" data-idx="8">Beyond</li>
-          <li class="songitem" data-idx="9">Motherboard</li>
-          <li class="songitem" data-idx="10">Fragments of Time (feat. Todd Edwards)</li>
-          <li class="songitem" data-idx="11">Doin' it Right (feat. Panda Bear)</li>
-          <li class="songitem" data-idx="12">Contact</li>
-        </ul>
-      </div>
-      <!-- IA BOT -->
-   <!-- IA BOT -->
-<div class="ia-box">
-  <img src="cabeza.jpg" class="ia-avatar" alt="RAM Bot">
-  <div class="ia-label">RAM Bot</div>
-  <div class="chatbot-area ram-bot-panel">
-    <div id="webchat" style="width:100%;height:410px;min-width:210px;"></div>
+<!-- ========== BLOQUE DE BIENVENIDA COMPLETA ========== -->
+<div id="pantalla-carga-inicio">
+  <video id="video-carga-inicio" autoplay muted loop playsinline>
+    <source src="intro.mp4" type="video/mp4" />
+  </video>
+  <div id="overlay-carga-video"></div>
+  <div class="contenedor-bienvenida-inicio">
+    <img class="logo-bienvenida-inicio" src="logo-top.png" alt="Logo RAM">
+    <div class="titulo-bienvenida-inicio">Bienvenido</div>
+    <div class="desc-bienvenida-inicio">Random Access Memories<br>AI EXPERIENCE</div>
+    <button class="boton-bienvenida-inicio" id="boton-iniciar-inicio">
+      INICIAR <span class="icon-rayito">⚡</span>
+    </button>
   </div>
 </div>
-
-<!-- Fuera del div agrega al final del body: -->
-<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
-<script>
-  window.WebChat.renderWebChat({
-    directLine: window.WebChat.createDirectLine({ token: '6EcxB9Y4zOvuJDQmGv3UdIhdsuI2IcMBraBWGeUOKn1CdUctrqDqJQQJ99BJACi5YpzAArohAAABAZBS31ID.4WGzlMKjqJsU6itlfmq9rDlolRPxNtlTP80xmeVeRtLPsadLWLaCJQQJ99BJACi5YpzAArohAAABAZBS2I3j' }),
-    styleOptions: {
-      backgroundColor: 'rgba(28,20,11,0.97)',
-      botAvatarImage: 'cabeza.jpg',
-      botAvatarInitials: 'DP',
-      botAvatarBackgroundColor: "#e9c468",
-      userAvatarInitials: 'YO',
-      userAvatarBackgroundColor: '#ffeec0',
-      primaryFont: 'Montserrat, Arial, sans-serif',
-      bubbleFromUserBackground: '#e9c468',
-      bubbleFromUserTextColor: '#181818',
-      bubbleBackground: '#181818',
-      bubbleBorderColor: '#e9c46899',
-      bubbleTextColor: '#ffeec0',
-      sendBoxBackground: '#222',
-      sendBoxTextColor: '#ffeec0',
-      accent: '#e9c468',
-      suggestedActionBorderColor: '#e9c468',
-      suggestedActionBackground: '#fffbe966',
-      suggestedActionTextColor: '#232526',
-      paddingRegular: 16,
-      paddingWide: 22,
-      borderRadius: 18,
-      hideUploadButton: false
-    }
-  }, document.getElementById('webchat'));
-</script>
-      <!-- Reproductor y letra derecha -->
-      <div style="display:flex;flex-direction:column;align-items:center;flex:1;" class="playerpanel">
-        <span class="player-title">Reproductor RAM <b>AI Edition</b></span>
-        <div class="player-coverbox">
-          <img id="coverArt" src="cover.jpg" class="player-cover" alt="Carátula álbum">
-          <div class="player-songname" id="songName">Give Life Back to Music</div>
-          <div class="player-artist" id="songArtist">Daft Punk · Random Access Memories</div>
-        </div>
-        <div class="player-controls">
-          <button class="player-btn" id="prevBtn" title="Anterior">&#9198;</button>
-          <button class="player-btn" id="playPauseBtn" title="Play">&#9658;</button>
-          <button class="player-btn" id="nextBtn" title="Siguiente">&#9197;</button>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;width:100%;margin:1em 0 0.5em 0;">
-          <span class="player-time" id="currentTime">0:00</span>
-          <input type="range" min="0" max="100" value="0" class="player-slider" id="seekBar">
-          <span class="player-time" id="duration">0:00</span>
-        </div>
-        <audio id="audioPlayer"><source id="audioSource" src=""></audio>
-        <div class="lyricsbox" id="lyricsbox"></div>
+<!-- ========== TU PAGINA RAM INTACTA ========== -->
+<video id="bg-video" autoplay loop muted playsinline><source src="videoplayback (1).mp4" type="video/mp4"></video>
+<div class="overlay"></div>
+<img src="logo-top.png" class="icono-top" alt="Logo RAM">
+<header>
+  <h1>Random Access Memories AI</h1>
+  <div class="subtitle">Inteligencia artificial + Daft Punk · Una experiencia única basada en RAM</div>
+  <nav>
+    <a href="#ia">IA</a>
+    <a href="#curiosidades">Curiosidades</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+<main style="flex:1;">
+  <div class="dashboard-wrap">
+    <!-- Lista canciones -->
+    <div class="listbox">
+      <div class="list-title">Canciones RAM</div>
+      <ul class="song-list" id="songList">
+        <li class="songitem" data-idx="0">Give Life Back to Music</li>
+        <li class="songitem" data-idx="1">The Game of Love</li>
+        <li class="songitem" data-idx="2">Giorgio by Moroder</li>
+        <li class="songitem" data-idx="3">Within</li>
+        <li class="songitem" data-idx="4">Instant Crush (feat. Julian Casablancas)</li>
+        <li class="songitem" data-idx="5">Lose Yourself to Dance (feat. Pharrell Williams)</li>
+        <li class="songitem" data-idx="6">Touch (feat. Paul Williams)</li>
+        <li class="songitem" data-idx="7">Get Lucky (feat. Pharrell Williams and Nile Rodgers)</li>
+        <li class="songitem" data-idx="8">Beyond</li>
+        <li class="songitem" data-idx="9">Motherboard</li>
+        <li class="songitem" data-idx="10">Fragments of Time (feat. Todd Edwards)</li>
+        <li class="songitem" data-idx="11">Doin' it Right (feat. Panda Bear)</li>
+        <li class="songitem" data-idx="12">Contact</li>
+      </ul>
+    </div>
+    <!-- IA BOT -->
+    <div class="ia-box">
+      <img src="cabeza.jpg" class="ia-avatar" alt="RAM Bot">
+      <div class="ia-label">RAM Bot</div>
+      <div class="chatbot-area ram-bot-panel">
+        <div id="webchat" style="width:100%;height:410px;min-width:210px;"></div>
       </div>
     </div>
-  </main>
-  <footer>
-    <span class="footer-info">Proyecto IA | Daft Punk RAM • 2025</span>
-    Celebrando la elegancia, innovación y magia de Random Access Memories
-  </footer>
-  <script>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <script>
+      window.WebChat.renderWebChat({
+        directLine: window.WebChat.createDirectLine({ token: '6EcxB9Y4zOvuJDQmGv3UdIhdsuI2IcMBraBWGeUOKn1CdUctrqDqJQQJ99BJACi5YpzAArohAAABAZBS31ID.4WGzlMKjqJsU6itlfmq9rDlolRPxNtlTP80xmeVeRtLPsadLWLaCJQQJ99BJACi5YpzAArohAAABAZBS2I3j' }),
+        styleOptions: {
+          backgroundColor: 'rgba(28,20,11,0.97)',
+          botAvatarImage: 'cabeza.jpg',
+          botAvatarInitials: 'DP',
+          botAvatarBackgroundColor: "#e9c468",
+          userAvatarInitials: 'YO',
+          userAvatarBackgroundColor: '#ffeec0',
+          primaryFont: 'Montserrat, Arial, sans-serif',
+          bubbleFromUserBackground: '#e9c468',
+          bubbleFromUserTextColor: '#181818',
+          bubbleBackground: '#181818',
+          bubbleBorderColor: '#e9c46899',
+          bubbleTextColor: '#ffeec0',
+          sendBoxBackground: '#222',
+          sendBoxTextColor: '#ffeec0',
+          accent: '#e9c468',
+          suggestedActionBorderColor: '#e9c468',
+          suggestedActionBackground: '#fffbe966',
+          suggestedActionTextColor: '#232526',
+          paddingRegular: 16,
+          paddingWide: 22,
+          borderRadius: 18,
+          hideUploadButton: false
+        }
+      }, document.getElementById('webchat'));
+    </script>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;" class="playerpanel">
+      <span class="player-title">Reproductor RAM <b>AI Edition</b></span>
+      <div class="player-coverbox">
+        <img id="coverArt" src="cover.jpg" class="player-cover" alt="Carátula álbum">
+        <div class="player-songname" id="songName">Give Life Back to Music</div>
+        <div class="player-artist" id="songArtist">Daft Punk · Random Access Memories</div>
+      </div>
+      <div class="player-controls">
+        <button class="player-btn" id="prevBtn" title="Anterior">⏮</button>
+        <button class="player-btn" id="playPauseBtn" title="Play">►</button>
+        <button class="player-btn" id="nextBtn" title="Siguiente">⏭</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;width:100%;margin:1em 0 0.5em 0;">
+        <span class="player-time" id="currentTime">0:00</span>
+        <input type="range" min="0" max="100" value="0" class="player-slider" id="seekBar">
+        <span class="player-time" id="duration">0:00</span>
+      </div>
+      <audio id="audioPlayer"><source id="audioSource" src=""></audio>
+      <div class="lyricsbox" id="lyricsbox"></div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span class="footer-info">Proyecto IA | Daft Punk RAM • 2025</span>
+  Celebrando la elegancia, innovación y magia de Random Access Memories
+</footer>
+<script>
 const songFiles = [
   "Give Life Back to Music.mp3","The Game of Love.mp3","Giorgio by Moroder.mp3","Within.mp3","Instant Crush (feat. Julian Casablancas).mp3","Lose Yourself to Dance (feat. Pharrell Williams).mp3","Touch (feat. Paul Williams).mp3","Get Lucky (feat. Pharrell Williams and Nile Rodgers).mp3","Beyond.mp3","Motherboard.mp3","Fragments of Time (feat. Todd Edwards).mp3","Doin' it Right (feat. Panda Bear).mp3","Contact.mp3"
 ];
@@ -784,7 +745,7 @@ That's how you know the magic's right`,
   "Motherboard.mp3":"(Instrumental track)",
   "Contact.mp3":"(Instrumental/No official lyrics)"
 };
-// --- Player logic (igual)
+// --- Player logic
 const audioPlayer = document.getElementById("audioPlayer"), audioSource = document.getElementById("audioSource");
 const playPauseBtn = document.getElementById("playPauseBtn"), nextBtn = document.getElementById("nextBtn"), prevBtn = document.getElementById("prevBtn"), seekBar = document.getElementById("seekBar");
 const currentTime = document.getElementById("currentTime"), duration = document.getElementById("duration");
@@ -820,14 +781,14 @@ function formatTime(s){s=Math.floor(s);let min=Math.floor(s/60);let sec=s%60;ret
 Array.from(songListBox.getElementsByClassName('songitem')).forEach((li,i)=>li.onclick=function(){currentSongIndex=i;loadSong(i);playAudio();});
 loadSong(currentSongIndex);
 <script>
-    document.getElementById("pantalla-carga-boton").onclick = function() {
-      const pc = document.getElementById('pantalla-carga');
-      pc.classList.add('hide');
-      document.body.style.overflow = "";
-      setTimeout(()=>{ pc.style.display = 'none'; }, 900);
-    };
-    // Bloquea scroll inicial en móviles/pantalla completa
-    document.body.style.overflow = "hidden";
-  </script>
+  document.getElementById("boton-iniciar-inicio").onclick = function() {
+    let intro=document.getElementById("pantalla-carga-inicio");
+    intro.classList.add("hide");
+    setTimeout(()=>{ intro.style.display="none"; document.body.style.overflow=""; }, 900);
+    let vid=document.getElementById("video-carga-inicio");
+    if(vid){try{vid.pause();vid.currentTime=0;}catch(e){}}
+  };
+  document.body.style.overflow = "hidden";
+</script>
 </body>
 </html>
