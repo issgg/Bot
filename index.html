@@ -780,6 +780,7 @@ function updateTimes(){
 function formatTime(s){s=Math.floor(s);let min=Math.floor(s/60);let sec=s%60;return `${min}:${sec<10?'0'+sec:sec}`;}
 Array.from(songListBox.getElementsByClassName('songitem')).forEach((li,i)=>li.onclick=function(){currentSongIndex=i;loadSong(i);playAudio();});
 loadSong(currentSongIndex);
+</script>
 <script>
   document.getElementById("boton-iniciar-inicio").onclick = function() {
     let intro=document.getElementById("pantalla-carga-inicio");
