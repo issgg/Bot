@@ -7,6 +7,99 @@
   <link rel="icon" href="logo-top.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* PANTALLA DE CARGA */
+    #pantalla-carga {
+      position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 10000;
+      display: flex; flex-direction:column; align-items:center; justify-content:center;
+      background: radial-gradient(circle at 60% 44%, #ffeec018 0%, #181818 120%);
+      pointer-events: all;
+      transition: opacity 1s cubic-bezier(.61,-0.01,.37,.99);
+    }
+    #pantalla-carga.hide {
+      opacity: 0; pointer-events: none; filter: blur(22px) brightness(1.2);
+      transition: opacity 0.9s cubic-bezier(.67,-0.17,.46,1.16), filter 0.6s;
+    }
+    #pantalla-carga-logo {
+      width:132px;height:132px; margin-bottom: 2.3rem; 
+      filter: drop-shadow(0 0 36px #ffeec077) drop-shadow(0 0 26px #e9c468cc);
+      animation: glowlogo 2s infinite alternate;
+    }
+    @keyframes glowlogo {
+      0% { filter: drop-shadow(0 0 18px #ffeec044) drop-shadow(0 0 8px #e9c468cc);}
+      100% { filter: drop-shadow(0 0 34px #ffeec099) drop-shadow(0 0 46px #e9c468ee);}
+    }
+    #pantalla-carga-h1 {
+      font-family: 'Orbitron'; letter-spacing: 3.2px; font-size: 2.18em;
+      color: #ffeec0; text-shadow:0 0 30px #ffeec022,0 2px 24px #e9c46844,0 1px 10px #fffbe9aa;
+      margin:0 0 1.4rem 0; animation: flicker 1.2s infinite alternate;
+    }
+    @keyframes flicker {
+      0%   { opacity:1; filter: brightness(1);}
+      94%  { opacity:.90;}
+      96%  { opacity:.60; filter:brightness(.84);}
+      98%  { opacity:1; }
+      100% { opacity:.95; }
+    }
+    #pantalla-carga-desc {
+      color: #ffeec0dd; font-size: 1.17em; font-family: 'Montserrat';
+      margin-bottom: 2.5em; text-shadow: 0 0 10px #ffd18111;
+      text-align:center;
+      animation:descIn 1.9s;
+    }
+    @keyframes descIn {from{opacity:0;transform:translateY(40px);}to{opacity:1;}}
+    #pantalla-carga-boton {
+      padding:1em 2.5em;font-size:1.23em; font-family:'Orbitron';
+      border-radius: 19px;background:#e9c468;color:#181818;font-weight:bold;border:none;box-shadow:0 1px 16px #e9c46844;cursor:pointer;
+      transition: background 0.18s, color 0.16s, filter 0.2s, transform 0.18s;
+      outline: none; border: none;
+      letter-spacing:1.2px;
+      animation: pulse 1.4s infinite alternate;
+    }
+    #pantalla-carga-boton:hover {background:#ffeec0;color:#222;transform:scale(1.07);filter:brightness(1.1);}
+    @keyframes pulse { to{box-shadow:0 1px 34px #ffeec055;} }
+    /* Electric animation background SVG */
+    #pantalla-carga-electric {
+      position:absolute; left:0; top:0; width:100vw; height:100vh;z-index:-1; animation:fadeinBg 2s;
+      pointer-events:none;
+      opacity:0.95;
+      filter: blur(2.5px) brightness(1.1) opacity(0.95);
+    }
+    @keyframes fadeinBg {from{opacity:0;}to{opacity:0.95;}}
+    /* ¡El resto de tu CSS y página debajo sigue igual! */
+  </style>
+</head>
+<body>
+  <!-- PANTALLA DE CARGA RAM -->
+  <div id="pantalla-carga">
+    <svg id="pantalla-carga-electric">
+      <defs>
+        <linearGradient id="elec1" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#ffeec099"/>
+          <stop offset="100%" stop-color="#e9c468" />
+        </linearGradient>
+      </defs>
+      <polyline points="0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180"
+        style="fill:none;stroke:url(#elec1);stroke-width:10;stroke-linecap:round;stroke-dasharray:16,23;filter:url(#blur); opacity:.28;">
+        <animate attributeName="points"
+          dur="2s" repeatCount="indefinite"
+          values="0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180;
+                  0,140 60,180 120,160 180,200 240,140 300,175 360,120 420,180 480,130 540,160 600,120 660,180 720,150 800,200 1024,160;
+                  0,160 60,120 120,180 180,140 240,200 300,160 360,175 420,130 480,160 540,120 600,200 660,150 720,180 800,144 1024,180" />
+      </polyline>
+    </svg>
+    <img id="pantalla-carga-logo" src="logo-top.png" alt="Logo RAM">
+    <h2 id="pantalla-carga-h1">Bienvenido</h2>
+    <div id="pantalla-carga-desc">Random Access Memories<br>AI EXPERIENCE</div>
+    <button id="pantalla-carga-boton">INICIAR</button>
+  </div>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Access Memories AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo-top.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
     body {margin:0;min-height:100vh;background:#181818;display:flex;flex-direction:column;font-family:'Montserrat',Arial,sans-serif;color:#eae8e6;overflow-x:hidden;}
     #bg-video {position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;filter:brightness(0.52) blur(1px);}
     .overlay {position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(117deg,#161717bf 35%,#2c2a2f88 130%);opacity:0.65;z-index:-1;pointer-events:none;}
@@ -726,6 +819,15 @@ function updateTimes(){
 function formatTime(s){s=Math.floor(s);let min=Math.floor(s/60);let sec=s%60;return `${min}:${sec<10?'0'+sec:sec}`;}
 Array.from(songListBox.getElementsByClassName('songitem')).forEach((li,i)=>li.onclick=function(){currentSongIndex=i;loadSong(i);playAudio();});
 loadSong(currentSongIndex);
-</script>
+<script>
+    document.getElementById("pantalla-carga-boton").onclick = function() {
+      const pc = document.getElementById('pantalla-carga');
+      pc.classList.add('hide');
+      document.body.style.overflow = "";
+      setTimeout(()=>{ pc.style.display = 'none'; }, 900);
+    };
+    // Bloquea scroll inicial en móviles/pantalla completa
+    document.body.style.overflow = "hidden";
+  </script>
 </body>
 </html>
